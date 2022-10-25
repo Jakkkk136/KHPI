@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using _Scripts.Controllers;
-using _Scripts.Patterns.Events;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace _Scripts.Helpers
@@ -20,13 +17,7 @@ namespace _Scripts.Helpers
 
         [SerializeField] private int LevelToEnable;
         [SerializeField] private eCheckLevelRule rule;
-
-        [BoxGroup("Event on disable")]
-        [SerializeField] private bool sendEventIfDisabled;
-        [BoxGroup("Event on disable")]
-        [ValueDropdown("GetAllEventsNames")] 
-        [SerializeField] public string eventIdToSendOnDisable;
-
+        
         private bool needToStayEnabled;
         
         private void OnEnable()
@@ -40,24 +31,10 @@ namespace _Scripts.Helpers
                 _ => false
             };
 
-            if (needToStayEnabled == false && sendEventIfDisabled == false)
+            if (needToStayEnabled == false)
             {
                 gameObject.SetActive(false);
             }
-        }
-
-        private void Start()
-        {
-            if (needToStayEnabled == false && sendEventIfDisabled == true)
-            {
-                this.OnEvent(eventIdToSendOnDisable);
-                gameObject.SetActive(false);
-            }
-        }
-        
-        public IEnumerable<string> GetAllEventsNames()
-        {
-            return EventID.GetAllEventsNames();
         }
     }
 }

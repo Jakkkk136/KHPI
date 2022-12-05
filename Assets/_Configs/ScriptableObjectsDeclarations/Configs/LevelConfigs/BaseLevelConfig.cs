@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Configs.ScriptableObjectsDeclarations.Configs.LevelConfigs
 {
-    [Serializable][CreateAssetMenu(fileName = "Level Config", menuName = "Battleships/Level Config")]
+    [Serializable][CreateAssetMenu(fileName = "Level Config", menuName = "KHPI/Level Config")]
     public class BaseLevelConfig : SerializedScriptableObject
     {
         [ValueDropdown("GetScenesDropdown")]

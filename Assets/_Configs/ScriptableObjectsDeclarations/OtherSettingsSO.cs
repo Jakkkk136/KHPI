@@ -8,7 +8,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 [Serializable]
-[CreateAssetMenu(fileName = "OtherSettingsSO", menuName = "Battleships/Game Settings/OtherSettingsSO")]
+[CreateAssetMenu(fileName = "OtherSettingsSO", menuName = "KHPI/Game Settings/OtherSettingsSO")]
 public class OtherSettingsSO : SingletonScriptableObject<OtherSettingsSO>
 {
     [SerializeField] private float hitEnemyBodyForceMult = 5f;

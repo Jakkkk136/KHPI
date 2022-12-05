@@ -2,7 +2,7 @@
 
 namespace _Configs.ScriptableObjectsDeclarations.Configs
 {
-	[CreateAssetMenu(fileName = "CameraScakeConfigSO", menuName = "Battleships/Camera shake Config", order = 0)]
+	[CreateAssetMenu(fileName = "CameraScakeConfigSO", menuName = "KHPI/Camera shake Config", order = 0)]
 	public class CameraShakeConfigSO : ScriptableObject
 	{
 		[SerializeField] private float impulseDuration;

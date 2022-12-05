@@ -17,7 +17,7 @@ using Sirenix.Utilities.Editor;
 namespace _Configs.ScriptableObjectsDeclarations.Configs
 {
     [Serializable]
-    [CreateAssetMenu(fileName = "LevelOrder", menuName = "Battleships/Game Settings/LevelOrderSettings")]
+    [CreateAssetMenu(fileName = "LevelOrder", menuName = "KHPI/Game Settings/LevelOrderSettings")]
     public class LevelOrder : SingletonScriptableObject<LevelOrder>
     {
         [FormerlySerializedAs("lowBorderOfRandomLevels")] [SerializeField] private int levelToStartOnSecondLap = 6;

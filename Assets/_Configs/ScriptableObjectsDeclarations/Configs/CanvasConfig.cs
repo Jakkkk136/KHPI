@@ -1,7 +1,7 @@
 ﻿using _Scripts.Enums;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CanvasConfig", menuName = "Battleships/Canvas Config", order = 0)]
+[CreateAssetMenu(fileName = "CanvasConfig", menuName = "KHPI/Canvas Config", order = 0)]
 public class CanvasConfig : ScriptableObject
 {
     [SerializeField] private float delayShowingWinWindow = 1.5f;

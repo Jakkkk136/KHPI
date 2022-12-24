@@ -2,15 +2,18 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using _Scripts.Patterns.SharedData;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using SFB;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Button))]
-public class CanvasSampleOpenFileText : MonoBehaviour, IPointerDownHandler {
-    public Text output;
-
+public class CanvasSampleOpenFileText : SharedDataUserBehaviour, IPointerDownHandler
+{
+    private string loadedString;
+    
 #if UNITY_WEBGL && !UNITY_EDITOR
     //
     // WebGL
@@ -32,7 +35,10 @@ public class CanvasSampleOpenFileText : MonoBehaviour, IPointerDownHandler {
     //
     public void OnPointerDown(PointerEventData eventData) { }
 
-    void Start() {
+    protected override void Start()
+    {
+        base.Start();
+
         var button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);
     }
@@ -48,6 +54,11 @@ public class CanvasSampleOpenFileText : MonoBehaviour, IPointerDownHandler {
     private IEnumerator OutputRoutine(string url) {
         var loader = new WWW(url);
         yield return loader;
-        output.text = loader.text;
+        loadedString = loader.text;
+        
+        Debug.LogWarning(loadedString);
+        JsonUtility.FromJsonOverwrite(loadedString, sharedData.LevelSo);
+
+        SceneManager.LoadScene("GameScene");
     }
 }

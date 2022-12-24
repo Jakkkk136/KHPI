@@ -1,17 +1,18 @@
-using System;
 using System.Collections;
+using _Scripts.Patterns.SharedData;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using SFB;
 
 [RequireComponent(typeof(Button))]
-public class CanvasSampleOpenFileImage : MonoBehaviour, IPointerDownHandler {
+public class CanvasSampleOpenFileImage : SharedDataUserBehaviour, IPointerDownHandler 
+{
     public RawImage output;
 
     private float defaultWidth, defaultHeight;
 
-    private void Awake()
+    protected void Awake()
     {
         defaultWidth = output.rectTransform.rect.width;
         defaultHeight = output.rectTransform.rect.height;
@@ -38,7 +39,10 @@ public class CanvasSampleOpenFileImage : MonoBehaviour, IPointerDownHandler {
     //
     public void OnPointerDown(PointerEventData eventData) { }
 
-    void Start() {
+    protected override void Start()
+    {
+        base.Start();
+
         var button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);
     }
@@ -59,27 +63,6 @@ public class CanvasSampleOpenFileImage : MonoBehaviour, IPointerDownHandler {
         
         yield return loader;
         
-        Texture2D t = loader.texture;
-        
-        float newHeight, newWidth;
-        float aspect = t.width / (float)t.height;
-        
-        bool imageIsWide = t.width > t.height;
-        
-        if (imageIsWide)
-        {
-            newWidth = (int)output.rectTransform.rect.width;
-            newHeight = Mathf.RoundToInt(newWidth / aspect);
-        }
-        else
-        {
-            newHeight = (int)output.rectTransform.rect.height;
-            newWidth = newHeight * aspect;
-        }
-        
-        output.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, newWidth);
-        output.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
-        
-        output.texture = t;
+        sharedData.LevelSo.SetLevelTexture(loader.texture);
     }
 }

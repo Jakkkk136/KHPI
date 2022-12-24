@@ -11,11 +11,12 @@ namespace _Scripts.Patterns.SharedData
 
         protected bool IsInited { get; private set; }
 
-        protected virtual void Awake()
+        
+        protected virtual void Start()
         {
             if (!isInternalInited) Init();
-            
         }
+
         protected void Init()
         {
             if (isInternalInited) return;
@@ -32,6 +33,8 @@ namespace _Scripts.Patterns.SharedData
 
         protected void HandleLevelData(SharedData sharedData)
         {
+            Debug.LogWarning((sharedData != null).ToString() + "___" + name);
+            
             this.sharedData = sharedData;
             this.IsInited = true;
             this.OnInit();

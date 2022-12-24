@@ -13,6 +13,7 @@ namespace _Scripts.Controllers
     public sealed class LevelManager : Singleton<LevelManager>
     {
         [SerializeField] private BaseLevelConfig levelConfig;
+        [SerializeField] private LevelSO levelSo;
 
         private List<Action<SharedData>> waitingInitialize = new List<Action<SharedData>>();
         private SharedData data;
@@ -30,7 +31,6 @@ namespace _Scripts.Controllers
 
         private void Start()
         {
-
             CreateLevelData();
             
             this.OnEvent(EventID.LEVEL_START);
@@ -49,7 +49,8 @@ namespace _Scripts.Controllers
 
         private void CreateLevelData()
         {
-            this.data = SharedData.Generate();
+            this.data = SharedData.Generate(levelSo);
+
             this.waitingInitialize.ForEach(x => x.Invoke(data));
             this.waitingInitialize.Clear();
         }

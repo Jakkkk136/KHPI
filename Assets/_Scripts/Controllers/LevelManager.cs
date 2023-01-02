@@ -1,31 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Configs.ScriptableObjectsDeclarations.Configs;
-using _Configs.ScriptableObjectsDeclarations.Configs.LevelConfigs;
 using _Scripts.Patterns;
 using _Scripts.Patterns.Events;
 using _Scripts.Patterns.SharedData;
-using _Scripts.Services;
-using UnityEngine;
 
 namespace _Scripts.Controllers
 {
     public sealed class LevelManager : Singleton<LevelManager>
     {
-        [SerializeField] private BaseLevelConfig levelConfig;
-        [SerializeField] private LevelSO levelSo;
+        public LevelSO levelSo;
 
         private List<Action<SharedData>> waitingInitialize = new List<Action<SharedData>>();
         private SharedData data;
         
-        public BaseLevelConfig LevelConfig => levelConfig;
-
         private bool levelEndSet = false;
         
         private void Awake()
         {
-            levelConfig = LevelOrder.Instance.GetLevelConfig(SaveManager.LevelForPlayer);
-            
             this.Subscribe<Action<SharedData>>(EventID.SHARED_DATA_REQUEST, HandleSharedDataRequest);
         }
 

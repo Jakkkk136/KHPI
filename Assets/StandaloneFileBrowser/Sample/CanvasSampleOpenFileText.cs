@@ -2,6 +2,7 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using _Scripts.Controllers;
 using _Scripts.Patterns.SharedData;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,9 +57,8 @@ public class CanvasSampleOpenFileText : SharedDataUserBehaviour, IPointerDownHan
         yield return loader;
         loadedString = loader.text;
         
-        Debug.LogWarning(loadedString);
         JsonUtility.FromJsonOverwrite(loadedString, sharedData.LevelSo);
 
-        SceneManager.LoadScene("GameScene");
+        Loader.Instance.LoadLevel();
     }
 }

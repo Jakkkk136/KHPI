@@ -19,12 +19,22 @@ namespace _Scripts.Controllers
 
         private void Start()
         {
-            if(!isCreatedOnLevel) LoadNextLevel();
+            if(!isCreatedOnLevel) OpenMainMenu();
         }
 
-        private void LoadNextLevel()
+        public void LoadLevel()
         {
-            SceneManager.LoadScene(LevelOrder.Instance.GetLevelConfig(SaveManager.LevelForPlayer).scene);
+            SceneManager.LoadScene("GameScene");
+        }
+
+        public void OpenMainMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        public void OpenCreatorScene()
+        {
+            SceneManager.LoadScene("CreatorScene");
         }
     }
 }

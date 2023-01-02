@@ -33,8 +33,6 @@ namespace _Scripts.Patterns.SharedData
 
         protected void HandleLevelData(SharedData sharedData)
         {
-            Debug.LogWarning((sharedData != null).ToString() + "___" + name);
-            
             this.sharedData = sharedData;
             this.IsInited = true;
             this.OnInit();

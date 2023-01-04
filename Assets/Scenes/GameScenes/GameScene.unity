@@ -791,6 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 583b75dfe7bb5424caed0359e6557a76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentForSpawnedElements: {fileID: 5359174915673575312}
 --- !u!4 &171164318
 Transform:
   m_ObjectHideFlags: 0
@@ -2591,7 +2592,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2330288cd0db424ebbc20313dfa9faf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelConfig: {fileID: 0}
   levelSo: {fileID: 11400000, guid: 1179e918b78504e449bd1cc94fa18c74, type: 2}
 --- !u!4 &839223684
 Transform:
@@ -6699,3 +6699,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7056ec6a4f441a24c96e054ca2fd2a85, type: 3}
+--- !u!224 &5359174915673575312 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1483856506182350134, guid: 7056ec6a4f441a24c96e054ca2fd2a85, type: 3}
+  m_PrefabInstance: {fileID: 5359174915673575311}
+  m_PrefabAsset: {fileID: 0}

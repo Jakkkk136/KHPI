@@ -16,7 +16,7 @@ namespace _Scripts.Patterns
             {
                 if (sInstance == null)
                 {
-                    sInstance = FindObjectOfType<T>();
+                    sInstance = FindObjectOfType<T>(true);
                 }
                 
                 if (sInstance == null)

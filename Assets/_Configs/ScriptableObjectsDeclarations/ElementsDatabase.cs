@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using _Scripts.Patterns;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Configs.ScriptableObjectsDeclarations
 {
@@ -12,5 +11,11 @@ namespace _Configs.ScriptableObjectsDeclarations
 	{
 		public List<ElementData> elements;
 		public ElementBase baseElementPrefab;
+
+		public ElementBase GetNewElement(string elementName)
+		{
+			ElementBase newElement = Instantiate(baseElementPrefab).Init(elements.Find(e => e.name == elementName));
+			return newElement;
+		}
 	}
 }

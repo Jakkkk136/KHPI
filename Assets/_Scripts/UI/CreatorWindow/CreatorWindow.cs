@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 using _Configs.ScriptableObjectsDeclarations;
+using _Scripts.Controllers;
 using _Scripts.Core.Elements;
+using _Scripts.Patterns;
 using UnityEngine;
 
-public class CreatorWindow : MonoBehaviour
+public class CreatorWindow : Singleton<CreatorWindow>
 {
     [SerializeField] private ElementInCreatorWindow elementInCreatorWindowPrefab;
     [SerializeField] private ElementInEditMode elementInEditModePrefab;
     [SerializeField] private Transform spawnedElementsParent;
     
-    private Dictionary<int, List<ElementInEditMode>> spawnedElements = new Dictionary<int, List<ElementInEditMode>>();
+    private Dictionary<ElementData, List<ElementInEditMode>> spawnedElements = new Dictionary<ElementData, List<ElementInEditMode>>();
 
     private bool inited;
 
@@ -48,31 +50,36 @@ public class CreatorWindow : MonoBehaviour
 
     public void AddSpawnedElement(ElementInEditMode element)
     {
-        if (spawnedElements.ContainsKey(element.data.NameHash) == false)
+        if (spawnedElements.ContainsKey(element.data) == false)
         {
-            spawnedElements.Add(element.data.NameHash, new List<ElementInEditMode>());
+            spawnedElements.Add(element.data, new List<ElementInEditMode>());
         }
         
-        spawnedElements[element.data.NameHash].Add(element);
+        spawnedElements[element.data].Add(element);
     }
 
     public void RemoveSpawnedElement(ElementInEditMode element)
     {
-        if (spawnedElements.ContainsKey(element.data.NameHash) == false)
+        if (spawnedElements.ContainsKey(element.data) == false)
         {
-            spawnedElements.Add(element.data.NameHash, new List<ElementInEditMode>());
+            spawnedElements.Add(element.data, new List<ElementInEditMode>());
         }
 
-        spawnedElements[element.data.NameHash].Remove(element);
+        spawnedElements[element.data].Remove(element);
     }
 
     public List<ElementInEditMode> GetListOfSpawnedElements(ElementInEditMode elementType)
     {
-        if (spawnedElements.ContainsKey(elementType.data.NameHash) == false)
+        if (spawnedElements.ContainsKey(elementType.data) == false)
         {
-            spawnedElements.Add(elementType.data.NameHash, new List<ElementInEditMode>());
+            spawnedElements.Add(elementType.data, new List<ElementInEditMode>());
         }
 
-        return spawnedElements[elementType.data.NameHash];
+        return spawnedElements[elementType.data];
+    }
+
+    public void FillInLevelData()
+    {
+        LevelManager.Instance.levelSo.AddElementsToDataList(spawnedElements);
     }
 }

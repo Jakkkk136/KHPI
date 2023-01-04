@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Scripts.Controllers;
 using _Scripts.Patterns;
+using Ookii.Dialogs;
+using TMPro;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +15,10 @@ namespace _Scripts.Core.Elements.SelectedMenu
 		[SerializeField] private Button duplicateButton;
 		[SerializeField] private Button scaleButton;
 		[SerializeField] private Button rotateButton;
+		[SerializeField] private Button switchStateButton;
 		[Space] 
+		[SerializeField] private TMP_InputField correctPressOrderInputField;
+		[Space]
 		[SerializeField] private GameObject scaleToolPanel;
 		[SerializeField] private Slider horizontalScaleSlider;
 		[SerializeField] private Slider verticalScaleSlider;
@@ -42,26 +47,48 @@ namespace _Scripts.Core.Elements.SelectedMenu
 
 			transform.position = thisPos;
 			
-			ActivateButtons();
+			ActivateMenu();
 		}
 
 		private void DeleteElement()
 		{
+			CloseScaleTool();
 			currentElement.DeleteElement();
 		}
 
 		private void DuplicateElement()
 		{
+			CloseScaleTool();
 			currentElement.DuplicateElement();
+		}
+
+		private void RotateElement()
+		{
+			CloseScaleTool();
+
+			currentElement.RotateElement();
+		}
+
+		private void SwitchElementState()
+		{
+			CloseScaleTool();
+
+			currentElement.ElementState = !currentElement.ElementState;
+		}
+
+		private void OnChangeInputField(String newInput)
+		{
+			currentElement.CorrectPressOrder = Int32.Parse(newInput);
 		}
 
 		private void OpenScaleTool()
 		{
-			HideButtons();
+			scaleButton.onClick.RemoveAllListeners();
+			scaleButton.onClick.AddListener(CloseScaleTool);
 			
 			scaleToolPanel.SetActive(true);
 
-			Vector2 savedScaleParams = LevelManager.Instance.levelSo.GetScaleParams(currentElement.data.NameHash);
+			Vector2 savedScaleParams = currentElement.data.scale;
 
 			horizontalScaleSlider.value = Mathf.InverseLerp(0.2f, 2.5f, savedScaleParams.x);
 			verticalScaleSlider.value = Mathf.InverseLerp(0.2f, 2.5f, savedScaleParams.y);
@@ -75,27 +102,31 @@ namespace _Scripts.Core.Elements.SelectedMenu
 			verticalScaleSlider.onValueChanged.AddListener(ChangeVerticalScale);
 		}
 
-		private void RotateElement()
+		private void CloseScaleTool()
 		{
-			currentElement.RotateElement();
+			scaleButton.onClick.RemoveAllListeners();
+			scaleButton.onClick.AddListener(OpenScaleTool);
+			
+			scaleToolPanel.SetActive(false);
 		}
 
+		
 		private void ChangeHorizontalScale(float normalizedValue)
 		{
-			Vector2 newScale = currentElement.transform.localScale;
+			Vector2 newScale = currentElement.data.scale;
 			newScale.x = Mathf.Lerp(0.2f, 2.5f, normalizedValue);
 
 			foreach (ElementInEditMode element in currentEditedElements)
 			{
 				element.transform.localScale = newScale;
 			}
-			
-			LevelManager.Instance.levelSo.SetXScaleParam(currentElement.data.NameHash, newScale.x);
+
+			currentElement.data.SetXScaleParam(newScale.x);
 		}
 
 		private void ChangeVerticalScale(float normalizedValue)
 		{
-			Vector2 newScale = currentElement.transform.localScale;
+			Vector2 newScale = currentElement.data.scale;
 			newScale.y = Mathf.Lerp(0.2f, 2.5f, normalizedValue);
 
 			foreach (ElementInEditMode element in currentEditedElements)
@@ -103,33 +134,43 @@ namespace _Scripts.Core.Elements.SelectedMenu
 				element.transform.localScale = newScale;
 			}
 
-			LevelManager.Instance.levelSo.SetYScaleParam(currentElement.data.NameHash, newScale.y);
+			currentElement.data.SetYScaleParam(newScale.y);
 		}
 
-		private void ActivateButtons()
+		private void ActivateMenu()
 		{
 			deleteButton.gameObject.SetActive(true);
 			duplicateButton.gameObject.SetActive(true);
 			scaleButton.gameObject.SetActive(true);
 			rotateButton.gameObject.SetActive(true);
+			switchStateButton.gameObject.SetActive(true);
 			
 			deleteButton.onClick.RemoveAllListeners();
 			duplicateButton.onClick.RemoveAllListeners();
 			scaleButton.onClick.RemoveAllListeners();
 			rotateButton.onClick.RemoveAllListeners();
+			switchStateButton.onClick.RemoveAllListeners();
+			
+			correctPressOrderInputField.gameObject.SetActive(true);
+			correctPressOrderInputField.onValueChanged.RemoveAllListeners();
+			correctPressOrderInputField.onValueChanged.AddListener(OnChangeInputField);
 			
 			deleteButton.onClick.AddListener(DeleteElement);
 			duplicateButton.onClick.AddListener(DuplicateElement);
 			scaleButton.onClick.AddListener(OpenScaleTool);
 			rotateButton.onClick.AddListener(RotateElement);
+			switchStateButton.onClick.AddListener(SwitchElementState);
 		}
 
-		public void HideButtons()
+		public void HideMenu()
 		{
 			deleteButton.gameObject.SetActive(false);
 			duplicateButton.gameObject.SetActive(false);
 			scaleButton.gameObject.SetActive(false);
 			rotateButton.gameObject.SetActive(false);
+			switchStateButton.gameObject.SetActive(false);
+
+			correctPressOrderInputField.gameObject.SetActive(false);
 
 			scaleToolPanel.SetActive(false);
 		}

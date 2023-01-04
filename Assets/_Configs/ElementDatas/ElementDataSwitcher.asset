@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeStateSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   inactiveStateSprite: {fileID: 21300000, guid: 97a3b52ceb3e78d49acd20116705b823, type: 3}
+  scale: {x: 1, y: 1}

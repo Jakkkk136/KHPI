@@ -8,20 +8,16 @@ namespace _Configs.ScriptableObjectsDeclarations
 	public class ElementData : ScriptableObject
 	{
 		public Sprite activeStateSprite, inactiveStateSprite;
+		public Vector2 scale = Vector2.one;
 
-		private int nameHash = -1;
-
-		public int NameHash
+		public void SetXScaleParam(float xScaleParam)
 		{
-			get
-			{
-				if (nameHash == -1)
-				{
-					nameHash = name.GetHashCode();
-				}
+			scale.x = xScaleParam;
+		}
 
-				return nameHash;
-			}
+		public void SetYScaleParam(float yScaleParam)
+		{
+			scale.y = yScaleParam;
 		}
 	}
 }

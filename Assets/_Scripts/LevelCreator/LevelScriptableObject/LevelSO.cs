@@ -43,7 +43,7 @@ public class LevelSO : ScriptableObject
 			{
 				var elementTransform = element.transform;
 				elementsData.Add(new LevelComponentData(
-					element.data.name, 
+					element.elementData.name, 
 					elementTransform.position, 
 					element.ElementState, 
 					elementTransform.rotation, 

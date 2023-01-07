@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Scripts.Core.Elements;
 using _Scripts.Patterns;
 using UnityEngine;
 
@@ -10,11 +11,11 @@ namespace _Configs.ScriptableObjectsDeclarations
 	public class ElementsDatabase : SingletonScriptableObject<ElementsDatabase>
 	{
 		public List<ElementData> elements;
-		public ElementBase baseElementPrefab;
+		public ElementInGame baseElementPrefab;
 
-		public ElementBase GetNewElement(string elementName)
+		public ElementInGame GetNewElement(string elementName)
 		{
-			ElementBase newElement = Instantiate(baseElementPrefab).Init(elements.Find(e => e.name == elementName));
+			ElementInGame newElement = Instantiate(baseElementPrefab).Init(elements.Find(e => e.name == elementName));
 			return newElement;
 		}
 	}

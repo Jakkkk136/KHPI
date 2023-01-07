@@ -88,7 +88,7 @@ namespace _Scripts.Core.Elements.SelectedMenu
 			
 			scaleToolPanel.SetActive(true);
 
-			Vector2 savedScaleParams = currentElement.data.scale;
+			Vector2 savedScaleParams = currentElement.elementData.scale;
 
 			horizontalScaleSlider.value = Mathf.InverseLerp(0.2f, 2.5f, savedScaleParams.x);
 			verticalScaleSlider.value = Mathf.InverseLerp(0.2f, 2.5f, savedScaleParams.y);
@@ -113,28 +113,28 @@ namespace _Scripts.Core.Elements.SelectedMenu
 		
 		private void ChangeHorizontalScale(float normalizedValue)
 		{
-			Vector2 newScale = currentElement.data.scale;
+			Vector2 newScale = currentElement.elementData.scale;
 			newScale.x = Mathf.Lerp(0.2f, 2.5f, normalizedValue);
 
 			foreach (ElementInEditMode element in currentEditedElements)
 			{
-				element.transform.localScale = newScale;
+				element.SetNewLocalScale(newScale);
 			}
 
-			currentElement.data.SetXScaleParam(newScale.x);
+			currentElement.elementData.SetXScaleParam(newScale.x);
 		}
 
 		private void ChangeVerticalScale(float normalizedValue)
 		{
-			Vector2 newScale = currentElement.data.scale;
+			Vector2 newScale = currentElement.elementData.scale;
 			newScale.y = Mathf.Lerp(0.2f, 2.5f, normalizedValue);
 
 			foreach (ElementInEditMode element in currentEditedElements)
 			{
-				element.transform.localScale = newScale;
+				element.SetNewLocalScale(newScale);
 			}
 
-			currentElement.data.SetYScaleParam(newScale.y);
+			currentElement.elementData.SetYScaleParam(newScale.y);
 		}
 
 		private void ActivateMenu()

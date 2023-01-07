@@ -1,4 +1,5 @@
 using _Configs.ScriptableObjectsDeclarations;
+using _Scripts.Core.Elements;
 using _Scripts.Patterns.SharedData;
 using UnityEngine;
 
@@ -14,9 +15,9 @@ public class LevelSetuper : SharedDataUserBehaviour
 
 		foreach (LevelSO.LevelComponentData levelComponentData in sharedData.LevelSo.elementsData)
 		{
-			ElementBase newElement = ElementsDatabase.Instance.GetNewElement(levelComponentData.elementName);
+			ElementInGame newElement = ElementsDatabase.Instance.GetNewElement(levelComponentData.elementName);
 			
-			newElement.InitElement(
+			newElement.InitElementOnGameScene(
 				parentForSpawnedElements, 
 				levelComponentData.elementScreenPos,
 				levelComponentData.elementScale, 

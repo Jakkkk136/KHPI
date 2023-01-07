@@ -1,7 +1,5 @@
 ﻿using System;
 using _Configs.ScriptableObjectsDeclarations;
-using Sirenix.OdinInspector;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,21 +8,6 @@ namespace _Scripts.Core.Elements
 	[Serializable]
 	public class ElementInEditMode : ElementInCreatorWindow
 	{
-		[SerializeField][PropertyOrder(-1)] private TextMeshProUGUI orderPressText;
-		
-		private bool _elementState;
-		private int _correctPressOrder;
-		
-		public bool ElementState
-		{
-			get => _elementState;
-			set
-			{
-				_elementState = value;
-				spriteHolder.sprite = _elementState ? data.activeStateSprite : data.inactiveStateSprite;
-			}
-		}
-
 		public int CorrectPressOrder
 		{
 			get => _correctPressOrder;
@@ -35,36 +18,29 @@ namespace _Scripts.Core.Elements
 			}
 		}
 		
+		public override void OnPointerDown(PointerEventData eventData)
+		{
+			SetDragTarget(this);
+			SelectedMenu.SelectedMenu.Instance.HideMenu();
+		}
+		
 		public override void Init(CreatorWindow creatorWindow, ElementData data)
 		{
 			base.Init(creatorWindow, data);
 			
 			transform.localScale = data.scale;
+
+			SetDefaultScaleOfText();
+			
 			ElementState = true;
 			CorrectPressOrder = 0;
 			
 			creatorWindow.AddSpawnedElement(this);
 		}
 
-		public override void PointerDownHandler(BaseEventData data)
+		protected override void SetDragTarget(ElementInEditMode target)
 		{
-			SetDragTarget(transform);
-		}
-		
-		public void PointedUpHandler(BaseEventData data)
-		{
-			SelectedMenu.SelectedMenu.Instance.ActivateNearElement(this);
-		}
-		
-		public override void DragHandler(BaseEventData data)
-		{
-			DragProcess(data);
-			SelectedMenu.SelectedMenu.Instance.HideMenu();
-		}
-
-		protected override void SetDragTarget(Transform target)
-		{
-			dragTarget = transform;
+			dragTarget = this;
 		}
 
 		public void DeleteElement()
@@ -74,6 +50,13 @@ namespace _Scripts.Core.Elements
 			SelectedMenu.SelectedMenu.Instance.HideMenu();
 		}
 
+		public void SetNewLocalScale(Vector3 localScale)
+		{
+			transform.localScale = localScale;
+			
+			SetDefaultScaleOfText();
+		}
+
 		public void DuplicateElement()
 		{
 			Vector3 newElementPos = transform.position;
@@ -81,7 +64,7 @@ namespace _Scripts.Core.Elements
 			newElementPos.y *= 0.85f;
 			
 			ElementInEditMode newElement = Instantiate(this, newElementPos, Quaternion.identity, transform.parent);
-			newElement.Init(creatorWindow, data);
+			newElement.Init(creatorWindow, elementData);
 			newElement.ElementState = ElementState;
 			SelectedMenu.SelectedMenu.Instance.ActivateNearElement(newElement);
 		}

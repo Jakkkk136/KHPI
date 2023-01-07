@@ -47,7 +47,7 @@ public class CanvasSampleSaveFileText : SharedDataUserBehaviour, IPointerDownHan
 
     public void OnClick()
     {
-        CreatorWindow.Instance.FillInLevelData();
+        CreatorWindow.Instance.FillInLevelDataToConfig();
         _data = LevelSerializer.SerializeLevel(sharedData.LevelSo);
         
         var path = StandaloneFileBrowser.SaveFilePanel("Title", "", "sample", "txt");

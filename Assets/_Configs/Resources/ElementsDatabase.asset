@@ -24,4 +24,4 @@ MonoBehaviour:
   elements:
   - {fileID: 11400000, guid: d07d6a16f19e09f4388e8d569e23edf4, type: 2}
   - {fileID: 11400000, guid: 285593a66a93ed74fb6bb87099d1a88c, type: 2}
-  baseElementPrefab: {fileID: 7519063356643453062, guid: d76512ab27e06c945a44fa26f076d495, type: 3}
+  baseElementPrefab: {fileID: 6287118261927970, guid: 287ed15d5266f9e40bd47bd304356a03, type: 3}

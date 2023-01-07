@@ -27,9 +27,9 @@ public class CreatorWindow : Singleton<CreatorWindow>
     {
         if(inited) return;
 
-        List<ElementData> datas = ElementsDatabase.Instance.elements;
+        List<ElementData> elementDatas = ElementsDatabase.Instance.elements;
     
-        ElementInCreatorWindow[] elements = new ElementInCreatorWindow[datas.Count];
+        ElementInCreatorWindow[] elements = new ElementInCreatorWindow[elementDatas.Count];
 
         for (int i = 0; i < elements.Length; i++)
         {
@@ -42,7 +42,7 @@ public class CreatorWindow : Singleton<CreatorWindow>
                 elements[i] = Instantiate(elementInCreatorWindowPrefab, elementInCreatorWindowPrefab.transform.parent);
             }
             
-            elements[i].Init(this, datas[i]);
+            elements[i].Init(this, elementDatas[i]);
         }
 
         inited = true;
@@ -50,35 +50,35 @@ public class CreatorWindow : Singleton<CreatorWindow>
 
     public void AddSpawnedElement(ElementInEditMode element)
     {
-        if (spawnedElements.ContainsKey(element.data) == false)
+        if (spawnedElements.ContainsKey(element.elementData) == false)
         {
-            spawnedElements.Add(element.data, new List<ElementInEditMode>());
+            spawnedElements.Add(element.elementData, new List<ElementInEditMode>());
         }
         
-        spawnedElements[element.data].Add(element);
+        spawnedElements[element.elementData].Add(element);
     }
 
     public void RemoveSpawnedElement(ElementInEditMode element)
     {
-        if (spawnedElements.ContainsKey(element.data) == false)
+        if (spawnedElements.ContainsKey(element.elementData) == false)
         {
-            spawnedElements.Add(element.data, new List<ElementInEditMode>());
+            spawnedElements.Add(element.elementData, new List<ElementInEditMode>());
         }
 
-        spawnedElements[element.data].Remove(element);
+        spawnedElements[element.elementData].Remove(element);
     }
 
     public List<ElementInEditMode> GetListOfSpawnedElements(ElementInEditMode elementType)
     {
-        if (spawnedElements.ContainsKey(elementType.data) == false)
+        if (spawnedElements.ContainsKey(elementType.elementData) == false)
         {
-            spawnedElements.Add(elementType.data, new List<ElementInEditMode>());
+            spawnedElements.Add(elementType.elementData, new List<ElementInEditMode>());
         }
 
-        return spawnedElements[elementType.data];
+        return spawnedElements[elementType.elementData];
     }
 
-    public void FillInLevelData()
+    public void FillInLevelDataToConfig()
     {
         LevelManager.Instance.levelSo.AddElementsToDataList(spawnedElements);
     }

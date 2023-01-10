@@ -57,12 +57,13 @@ namespace _Scripts.Core.Elements
 			transform.SetPositionAndRotation(screenPos, rotation);
 			transform.localScale = scale;
 			
-			SetDefaultScaleOfText();
-
+			orderPressText.transform.rotation = Quaternion.identity;
+			
 			ElementState = currentState;
 			_correctPressOrder = correctPressOrder;
 
 			SetClearTextIndex();
+			SetDefaultScaleOfText();
 		}
 
 		

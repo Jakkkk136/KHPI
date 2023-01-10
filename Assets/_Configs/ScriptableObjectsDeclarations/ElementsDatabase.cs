@@ -18,5 +18,10 @@ namespace _Configs.ScriptableObjectsDeclarations
 			ElementInGame newElement = Instantiate(baseElementPrefab).Init(elements.Find(e => e.name == elementName));
 			return newElement;
 		}
+
+		public ElementData GetElementData(string elementName)
+		{
+			return elements.Find(e => e.name == elementName);
+		}
 	}
 }

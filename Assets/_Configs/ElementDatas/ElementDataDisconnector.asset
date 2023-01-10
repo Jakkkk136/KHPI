@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf207562fa24cdf97fc1d928912a657, type: 3}
   m_Name: ElementDataDisconnector
   m_EditorClassIdentifier: 
-  activeStateSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  inactiveStateSprite: {fileID: 21300000, guid: 5a984bff39e031944bdd8fc5ae443bd8, type: 3}
+  activeStateSprite: {fileID: 21300000, guid: 7d0731a1cea3164498d5934195162e5a, type: 3}
+  inactiveStateSprite: {fileID: 21300000, guid: 7d0731a1cea3164498d5934195162e5a, type: 3}
   correctActiveSprite: {fileID: 21300000, guid: d6a44ab95b0def041a7929981a2c23a1, type: 3}
   correctInactiveSprite: {fileID: 21300000, guid: 0779ad3feec52124e97114bcbb12ef13, type: 3}
   incorrectActiveSprite: {fileID: 21300000, guid: 1a2673cb12e2ed1459bc6ab5dad05aae, type: 3}

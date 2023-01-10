@@ -60,8 +60,8 @@ namespace _Scripts.Core.Elements
 		public void DuplicateElement()
 		{
 			Vector3 newElementPos = transform.position;
-			newElementPos.x *= 1.15f;
-			newElementPos.y *= 0.85f;
+			newElementPos.x *= 1.05f;
+			newElementPos.y *= 0.95f;
 			
 			ElementInEditMode newElement = Instantiate(this, newElementPos, Quaternion.identity, transform.parent);
 			newElement.Init(creatorWindow, elementData);

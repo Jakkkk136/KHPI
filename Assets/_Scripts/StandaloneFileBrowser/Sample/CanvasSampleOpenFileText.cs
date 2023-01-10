@@ -58,7 +58,9 @@ public class CanvasSampleOpenFileText : SharedDataUserBehaviour, IPointerDownHan
         loadedString = loader.text;
         
         JsonUtility.FromJsonOverwrite(loadedString, sharedData.LevelSo);
-
-        Loader.Instance.LoadLevel();
+        
+        OnLevelFileOpened();
     }
+
+    protected virtual void OnLevelFileOpened() { }
 }

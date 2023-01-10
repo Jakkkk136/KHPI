@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Scripts.Patterns;
-using Ookii.Dialogs;
 using TMPro;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 

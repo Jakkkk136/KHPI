@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf207562fa24cdf97fc1d928912a657, type: 3}
   m_Name: ElementDataSwitcher
   m_EditorClassIdentifier: 
-  activeStateSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  inactiveStateSprite: {fileID: 21300000, guid: 97a3b52ceb3e78d49acd20116705b823, type: 3}
+  activeStateSprite: {fileID: 21300000, guid: ce21f67ad3cdc3048b72a4c59050d615, type: 3}
+  inactiveStateSprite: {fileID: 21300000, guid: ce21f67ad3cdc3048b72a4c59050d615, type: 3}
   correctActiveSprite: {fileID: 21300000, guid: 54b8604d8a7085842917d5b83ca73854, type: 3}
   correctInactiveSprite: {fileID: 21300000, guid: 58702b682724446469909705bca1de62, type: 3}
   incorrectActiveSprite: {fileID: 21300000, guid: 1a96ab5f501a8e84c9016458682e1ccb, type: 3}
   incorrectInactiveSprite: {fileID: 21300000, guid: 3e6e6fbbd946d0541923f45f4eaa2cf1, type: 3}
-  scale: {x: 1, y: 1}
+  scale: {x: 0.8244737, y: 0.5097369}

@@ -68,6 +68,38 @@ public class CreatorWindow : Singleton<CreatorWindow>
         spawnedElements[element.elementData].Remove(element);
     }
 
+    public void ClearSpawnedElements()
+    {
+        foreach (List<ElementInEditMode> spawnedElementsList in spawnedElements.Values)
+        {
+            for (int i = spawnedElementsList.Count - 1; i >= 0; i--)
+            {
+                spawnedElementsList[i].DeleteElement();               
+            }
+        }
+    }
+
+    public void EditExistingLevelConfig()
+    {
+        LevelTextureHolder.Instance.SetTexture(LevelManager.Instance.levelSo.DeserializeSavedImage());
+        ClearSpawnedElements();
+
+        foreach (LevelSO.LevelComponentData levelComponentData in LevelManager.Instance.levelSo.elementsData)
+        {
+            ElementInEditMode spawnedElementInEditMode =
+                Instantiate(
+                    ElementInEditModePrefab, 
+                    levelComponentData.elementScreenPos, 
+                    levelComponentData.elementRotation, 
+                    SpawnedElementsParent);
+            
+            spawnedElementInEditMode.Init(this, ElementsDatabase.Instance.GetElementData(levelComponentData.elementName));
+            spawnedElementInEditMode.CorrectPressOrder = levelComponentData.elementCorrectPressOrder;
+            spawnedElementInEditMode.ElementState = levelComponentData.elementState;
+            spawnedElementInEditMode.SetNewLocalScale(levelComponentData.elementScale);
+        }
+    }
+
     public List<ElementInEditMode> GetListOfSpawnedElements(ElementInEditMode elementType)
     {
         if (spawnedElements.ContainsKey(elementType.elementData) == false)
